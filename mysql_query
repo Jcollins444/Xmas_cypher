@@ -1,0 +1,16 @@
+SELECT *, (A.xmas_data+B.xmas_data) as pair_sums , 
+FROM `codechallenge-354115.tooo.xmas_data_ordered` as A
+ cross join  `codechallenge-354115.tooo.xmas_data_ordered` as B
+
+where A.og_order < B.og_order 
+and (B.og_order-A.og_order) <25
+and A.og_order>25
+and A.xmas_data   NOT  IN ( select (A.xmas_data+B.xmas_data) as pair_sums , 
+FROM `codechallenge-354115.tooo.xmas_data_ordered` as A
+ cross join  `codechallenge-354115.tooo.xmas_data_ordered` as B )
+
+
+order by 2 asc
+
+/*  a sql query to solve the xmas cypher. it takes the cartesian sum of of the xmas cypher data with itself. and then sums the pairs. it removes the duplicates. 
+and any other sum that can't be the correct answer using the where clauses. leaving the correct answer of 36845998 */
